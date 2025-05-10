@@ -90,13 +90,16 @@ local plugins = {
 			end
 		end,
 		config = function()
-      require('mini.tabline').setup()
+      require('mini.icons').setup()
 		end,
 	},
   {
     'echasnovski/mini.tabline',
     version = '*',
     enabled = is_linux(),
+    config = function()
+      require('mini.tabline').setup()
+    end,
   },
   {
     "echasnovski/mini.clue",
