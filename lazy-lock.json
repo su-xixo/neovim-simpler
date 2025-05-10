@@ -1,0 +1,14 @@
+{
+  "gruvbox.nvim": { "branch": "main", "commit": "dfc89cf5ce9a5ac149dd5d4b347fc1db3c1b2fa4" },
+  "indentmini.nvim": { "branch": "main", "commit": "b51cd09456c133b51115448dfb58e84465432029" },
+  "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
+  "mason-lspconfig.nvim": { "branch": "main", "commit": "d39a75bbce4b8aad5d627191ea915179c77c100f" },
+  "mason-tool-installer.nvim": { "branch": "main", "commit": "aafae207d5a2a28c59c9d478d8581c2739135d09" },
+  "mason.nvim": { "branch": "main", "commit": "7c7318e8bae7e3536ef6b9e86b9e38e74f2e125e" },
+  "mini.clue": { "branch": "main", "commit": "8e7681e9433766142e8c0977e7f9c31220c78cff" },
+  "mini.extra": { "branch": "main", "commit": "6927348ae967d229fa01c5d2a0baca9ef7d30de4" },
+  "mini.icons": { "branch": "main", "commit": "910db5df9724d65371182948f921fce23c2c881e" },
+  "mini.pick": { "branch": "main", "commit": "fa1e449e1080bf7aa9b2890ee186d23b1b4e1287" },
+  "mini.tabline": { "branch": "main", "commit": "06ef4ecaeca2e362c7d31113435d86d144b3cbbe" },
+  "treesitter": { "branch": "master", "commit": "28d480e0624b259095e56f353ec911f9f2a0f404" }
+}
