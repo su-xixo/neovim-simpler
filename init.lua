@@ -262,12 +262,15 @@ plugins.maosn = {
       mason_lspconfig.setup({
         ensure_installed = {
           "lua_ls",
+          "bashls"
         },
       })
 
       mason_tool_installer.setup({
         ensure_installed = {
           "stylua",
+          "shfmt",
+          "nixpkgs_fmt"
         },
       })
     end
@@ -306,6 +309,39 @@ plugins.treesitter_and_formatter = {
       })
 
     end,
+
+    {
+      'stevearc/conform.nvim',
+      event = { "BufReadPre", "BufNewFile" },
+      keys = {
+        {"<leader>mp", function ()
+          require("conform").format({
+            lsp_fallback = true,
+            async = false,
+            timeout_ms = 1000,
+          })
+        end, mode = {"n","v"}, desc = "Format file or range (in visual mode)"}
+      },
+      config = function()
+        local conform = require("conform")
+
+        conform.setup({
+          formatters_by_ft = {
+            bash = { "shfmt" },
+            lua = { "stylua" },
+            markdown = { "prettier" },
+            nix = {"nixpkgs_fmt"},
+            python = { "isort", "black" },
+            yaml = { "prettier" },
+          },
+          format_on_save = {
+            lsp_fallback = true,
+            async = false,
+            timeout_ms = 1000,
+          },
+        })
+      end,
+    },
   },
 }
 -- }}}
