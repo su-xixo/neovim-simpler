@@ -351,6 +351,7 @@ plugins.treesitter_and_formatter = {
 plugins.complition = {
 	{
 		"saghen/blink.cmp",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = { "rafamadriz/friendly-snippets" },
 		version = "1.*",
 		opts = {
@@ -441,6 +442,40 @@ plugins.complition = {
 }
 -- }}}
 
+-- plugins: misc {{{
+plugins.misc = {
+	{
+		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+      signs = {
+        add          = { text = '+' },
+        change       = { text = '-' },
+        delete       = { text = '_' },
+        topdelete    = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked    = { text = '┆' },
+      },
+    },
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = { "InsertEnter" },
+		config = function()
+			local autopairs = require("nvim-autopairs")
+			autopairs.setup({
+				check_ts = true, -- enable treesitter
+				ts_config = {
+					lua = { "string" }, -- don't add pairs in lua string treesitter nodes
+					javascript = { "template_string" }, -- don't add pairs in javscript template_string treesitter nodes
+					java = false, -- don't check treesitter on java
+				},
+			})
+		end,
+	},
+}
+-- }}}
+
 require("lazy").setup({
 	spec = {
 		plugins,
@@ -448,6 +483,7 @@ require("lazy").setup({
 		plugins.picker,
 		plugins.treesitter_and_formatter,
 		plugins.complition,
+		plugins.misc,
 	},
 	install = { colorscheme = { "habamax" } },
 	checker = { enabled = true },
@@ -550,6 +586,9 @@ vim.keymap.set("n", "<leader>cs", ":nohlsearch<CR>", { desc = "Clear search high
 
 -- Quick file reload
 vim.keymap.set("n", "<leader>r", ":e!<CR>", { desc = "Reload file" })
+
+-- typos
+vim.keymap.set("c", "<cmd>W<>CR", "<cmd>w<CR>")
 -- }}}
 
 vim.cmd([[colorscheme default]])
