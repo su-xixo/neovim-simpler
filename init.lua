@@ -67,7 +67,7 @@ local plugins = {
 	},
 	{
 		"nvimdev/indentmini.nvim",
-		event = "VeryLazy",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("indentmini").setup({
 				char = "▏",
@@ -80,6 +80,7 @@ local plugins = {
 	{
 		"echasnovski/mini.icons",
 		version = "*",
+		event = "VeryLazy",
 		init = function()
 			package.preload["nvim-web-devicons"] = function()
 				package.loaded["nvim-web-devicons"] = {}
@@ -94,6 +95,7 @@ local plugins = {
 	{
 		"echasnovski/mini.tabline",
 		version = "*",
+		event = "VeryLazy",
 		enabled = is_linux(),
 		config = function()
 			require("mini.tabline").setup()
@@ -162,6 +164,14 @@ local plugins = {
 					scroll_up = "<C-u>",
 				},
 			})
+		end,
+	},
+	{
+		"echasnovski/mini.surround",
+		version = "*",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("mini.surround").setup({})
 		end,
 	},
 }
@@ -445,18 +455,35 @@ plugins.complition = {
 -- plugins: misc {{{
 plugins.misc = {
 	{
+		"kdheepak/lazygit.nvim",
+		lazy = true,
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		keys = {
+			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
-      signs = {
-        add          = { text = '+' },
-        change       = { text = '-' },
-        delete       = { text = '_' },
-        topdelete    = { text = '‾' },
-        changedelete = { text = '~' },
-        untracked    = { text = '┆' },
-      },
-    },
+			signs = {
+				add = { text = "+" },
+				change = { text = "-" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
+				untracked = { text = "┆" },
+			},
+		},
 	},
 	{
 		"windwp/nvim-autopairs",
